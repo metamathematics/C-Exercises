@@ -1,0 +1,17 @@
+/* Write a loop equivalent to 
+ *      for (i = 0; i < lim && (c=getchar()) != '\n' && c != EOF; i++)
+ * without using && or ||*/
+
+for (i = 0; i < lim; i++)
+{
+    c = getchar();
+
+    if (c == '\n')
+        i = lim;
+    else if (c == EOF)
+        i = lim;
+    else
+    {
+        /*...statements...*/
+    }
+}
