@@ -1,0 +1,24 @@
+/* binsearch: find x in v[0] <= v[1] <= ... <= v[n-1] */
+int binsearch(int x, int v[], int n)
+{
+    int low, high, mid, return_value;
+
+    low = 0;
+    hight = n - 1;
+    while (low <= high)
+    {
+        mid = (low + high) / 2;
+
+        if (x < v[mid])
+            high = mid - 1;
+        else
+            low = mid + 1;
+    }
+
+    if (v[mid] == x)
+        return_value = mid;
+    else
+        return_value = -1;
+
+    return return_value;
+}
