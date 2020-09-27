@@ -2,13 +2,17 @@
 #include <string.h>
 #include <stdio.h>
 
-void itob(int, char[], int);
 char toHex(int);
+int toInt(char *);
+void toStr(char *, int);
+void itob(int, char[], int);
+void reverseStr(char *, int, int);
 
 /* Tests the itob function */
 int main(int arc, char* argv[])
 {
     char s[1000];
+    s[0] = '\0';
    
     if (arc != 3)
         printf("Usage: ./Exercise03_05 positiveInteger1 positiveInteger2\n");
@@ -30,12 +34,22 @@ void itob(int n, char s[], int b)
 
     for (i = 0; n > 0; i++)
     {
-        for (j = 1; (m = n - (pow(b, k) * j)) >= 0; j++);
+        for (j = 1; (m = n - (pow(b, k) * j)) >= 0; j++)
+        {
+            /* no statements */    
+        }
+        
         j--;
+
         if (b == 16 && j >= 10 && j <= 15)
             s[i] = toHex(j);
         else
-            s[i] = (j) + '0';/* need case for when j > 9 */
+            if (j < 10)
+                s[i] = (j) + '0';
+            else
+            {
+                toStr(s, j);    
+            }
 
         n -= pow(b, k) * j;
         k--;
@@ -46,6 +60,38 @@ void itob(int n, char s[], int b)
         s[i++] = '0';
     }
     s[i] = '\0';
+}
+
+void toStr(char *str, int num)
+{
+    char temp[100];
+    int i, n;
+    int last_char = strlen(str) - 1;
+
+    for (i = 0; num > 0; i++)
+    {
+        temp[i] = (num % 10) + '0';
+        num /= 10;
+    }
+
+    temp[i] = '\0';
+    
+    reverseStr(temp, 0, strlen(temp) - 1);
+    strcat(str, temp);
+}
+
+/*reverseStr: reverses the string*/
+void reverseStr(char *str, int start, int end)
+{
+    char temp;
+
+    if (start < end)
+    {
+        temp = str[start];
+        str[start] = str[end];
+        str[end] = temp;
+        reverseStr(str, ++start, --end);
+    }
 }
 
 /* toHex: converts digit to a hex letter. assumes 10 <= digit <= 15 */
@@ -77,7 +123,7 @@ int toInt(char *str)
 {
     int i, num = 0;
 
-    for (i = 0; i < strlen(str); i++)
+    for (i = 0; str[i] != '\0'; i++)
         num += (str[i] - '0') * pow(10, strlen(str) - (i + 1));
 
     return num;
