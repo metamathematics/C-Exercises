@@ -1,12 +1,15 @@
+/*******************************
+//
+// DESCRIPTION:
+//  Prints the value of EOF
+//
+********************************/
+
 #include <stdio.h>
 
-int main()
-{
-    int c;
-
-    c = EOF;
-
-    printf("EOF = %d\n", c);
+int main(int argc, char *argv[]) {
+    
+    printf("The value of EOF is %d\n", EOF);
 
     return 0;
 }
