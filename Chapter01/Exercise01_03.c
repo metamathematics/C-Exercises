@@ -1,28 +1,23 @@
+/************************************
+//
+// DESCRIPTION:
+//  Converts Fahrenheit to Celsius
+//
+************************************/
+
 #include <stdio.h>
 
-/* Print Fahrenheit-Celsius table
- *  for fahr = 0, 20, ..., 300 */
-int main()
-{
-    float fahr, celsius;
-    int lower, upper, step;
+int main(int argc, char *argv[]) {
+    int fahr;
+    float cels;
 
-    lower = 0;      /* lower linit of temperature table */
-    upper = 300;    /* upper limit */
-    step = 20;      /* step size */
+    printf("%5s %10s\n", "F", "C");
+    printf("------------------------\n");
 
-    printf("\n   Fahrenheit    Celsius\n");
-    printf("---------------------------\n");
-
-    fahr = lower;
-    while (fahr <= upper)
-    {
-        celsius = (5.0 / 9.0) * (fahr - 32.0);
-        printf("%10.0f %11.1f\n", fahr, celsius);
-        fahr += step;
+    for (fahr = 0; fahr <= 300; fahr += 20) {
+        cels = (5.0 / 9.0) * (fahr - 32);
+        printf("%6d %12.2f\n", fahr, cels);
     }
-
-    printf("\n");
 
     return 0;
 }
