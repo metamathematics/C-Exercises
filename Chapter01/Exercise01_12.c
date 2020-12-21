@@ -1,30 +1,33 @@
+/************************************
+//
+// DESCRIPTION:
+//  Prints input one word per line.
+//
+*************************************/
+
 #include <stdio.h>
 
-/* Prints input as one word per line */
-int main()
+int main(int argc, char *argv[])
 {
-    int input, nonword;
+    int input, escape;
 
-    input = getchar();
+    escape = 0;
 
-    nonword = 0;
-
-    while (input != EOF)
+    while ((input = getchar()) != EOF)
     {
         if (input == ' ' || input == '\n' || input == '\t')
         {
-            nonword++;
-            
-            if (nonword == 1)
+            if (++escape > 1)
+                ;/*Do nothing */
+            else
                 putchar('\n');
-            
-        } else {
+        } 
+        else 
+        {
+            escape = 0;
             putchar(input);
-            nonword = 0;
         }
-
-        input = getchar();
     }
-
+    
     return 0;
 }

@@ -1,27 +1,34 @@
+/************************************************
+//
+// DESCRIPTION:
+//  Replaces each tab, newline, and backslash
+//  with their respective escape sequence.
+//
+************************************************/
+
 #include <stdio.h>
 
-/* Copies input to output and
- *  replaces each tab with \t, each backspace with \b,
- *  and each backslash with \\*/
-int main()
+int main(int argc, char *argv[])
 {
     int input;
 
-    input = getchar();
-
-    while (input != EOF)
+    while ((input = getchar()) != EOF)
     {
-        if (input == '\t')
-            printf("\\t");
-        else if (input == '\b')
-            printf("\\b");
-        else if (input == '\\')
-            printf("\\\\");
-        else
-            putchar(input);
-
-        input = getchar();
+        switch (input)
+        {
+            case '\t' : printf("\\t");
+                        break;
+            case '\n' : printf("\\n");
+                        putchar('\n');
+                        break;
+            case '\\' : printf("\\\\");
+                        break;
+            default:
+                putchar(input);
+        }
     }
+
+    putchar('\n');
 
     return 0;
 }

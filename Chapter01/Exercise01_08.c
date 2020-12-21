@@ -1,32 +1,35 @@
+/**************************************
+//
+// DESCRIPTION:
+//  Counts blanks, newlines, and tabs.
+//
+**************************************/
+
 #include <stdio.h>
 
-/* Counts blanks, tabs, and newlines */
-
-int main()
+int main(int argc, char *argv[])
 {
-    int input, blanks, tabs, newlines;
+    int input;
+    long blanks, newlines, tabs;
 
-    blanks = 0;
-    tabs = 0;
-    newlines = 0;
+    blanks = newlines = tabs = 0;
 
-    input = getchar();
-
-    while (input != EOF)
+    while ((input = getchar()) != EOF)
     {
-        if (input == ' ')
-            blanks++;
-        
-        if (input == '\t')
-            tabs++;
-        
-        if (input == '\n')
-            newlines++;
+        switch (input)
+        {
+            case ' ' : blanks++;
+                       break;
 
-        input = getchar();
+            case '\n' : newlines++;
+                        break;
+
+            case '\t' : tabs++;
+                        break;
+        }
     }
 
-    printf("blanks = %d \ntabs = %d \nnewlines = %d\n", blanks, tabs, newlines);
+    printf("blanks: %ld \nnewlines: %ld \ntabs: %ld\n", blanks, newlines, tabs);
 
     return 0;
 }
