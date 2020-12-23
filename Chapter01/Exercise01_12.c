@@ -17,9 +17,7 @@ int main(int argc, char *argv[])
     {
         if (input == ' ' || input == '\n' || input == '\t')
         {
-            if (++escape > 1)
-                ;/*Do nothing */
-            else
+            if (++escape <= 1)
                 putchar('\n');
         } 
         else 

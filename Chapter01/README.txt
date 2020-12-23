@@ -25,3 +25,7 @@ Chapter 1 Exercises
     makes tabs and newlines visible in an unamiguous way.
 
 12. Write a program that prints its input one word per line.
+
+13. Write a program to print a histogram of the length of words in its input.
+
+14. Write a program to print a histogram of the frequencies of different characters.
