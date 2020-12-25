@@ -1,27 +1,54 @@
+/*****************************************
+//
+// DESCRIPTION:
+//  Prints a Fahreneit vs Celsius table.
+//
+******************************************/
+
 #include <stdio.h>
 
-float fahr_to_cel(int);
+#define MIN 0
+#define MAX 300
+#define STEP 20
 
-/* Prints a conversion table of Fahrenheit to Celsius */
-int main()
+float toCelsius(int);
+
+/******************************************
+//
+// Name: main
+//
+// Description: See above for description.
+//
+********************************************/
+
+int main(int argc, char *argv[]) 
 {
     int fahr;
 
-    printf("\n%18s %15s\n", "Fahrenheit", "Celsius");
-    printf("     -------------------------------\n");
-    
-    for (fahr = 0; fahr <= 300; fahr += 20)
-    {
-        printf("%15d %17.1f\n", fahr, fahr_to_cel(fahr));
-    }
+    printf("%5s %10s\n", "F", "C");
+    printf("------------------------\n");
 
-    putchar('\n');
+    for (fahr = MIN; fahr <= MAX; fahr += STEP)
+        printf("%6d %12.2f\n", fahr, toCelsius(fahr));
 
     return 0;
 }
 
-/* Converts Fahrenheit to Celsius */
-float fahr_to_cel(int fahr)
+/***********************************************************
+//
+// Name:         toCelsius
+//
+// Description:  Converts Fahrenheit to Celsius.
+//
+// Parameter:    fahrenheit (float) : The Fahreneit value
+//                                    to be converted to 
+//                                    Celsius.
+//
+// Return Value: The Celsius equivalent to the Fahrenheit
+//
+*************************************************************/
+
+float toCelsius(int fahrenheit)
 {
-    return (5.0 / 9.0) * (fahr - 32);
+    return (5.0 / 9.0) * (fahrenheit - 32);
 }

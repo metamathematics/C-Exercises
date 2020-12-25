@@ -29,3 +29,5 @@ Chapter 1 Exercises
 13. Write a program to print a histogram of the length of words in its input.
 
 14. Write a program to print a histogram of the frequencies of different characters.
+
+15. Rewrite the temperature conversion program to use a function for conversion.
