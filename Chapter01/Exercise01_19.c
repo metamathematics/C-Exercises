@@ -1,47 +1,63 @@
+/*******************************************
+//
+// Filename: Exercise01_19.c
+//
+// DESCRIPTION:
+//  Reverses the input a line at a time.
+//
+********************************************/
+
 #include <stdio.h>
-#define MAXLINE 1000    /* maximum input line size */
+#include <string.h>
 
-int getline(char line[], int maxline);
-void reverse(char line[], int length, char reverse_line[]);
+#define MAXLEN 1000
 
-/* prints the input in reverse */
-int main()
+void reverse(char*);
+
+/*****************************
+//
+// Name: main
+//
+// Decription: See above.
+//
+*****************************/
+
+int main(int argc, char *argv[])
 {
-    int len;                    /* current line length */
-    char line[MAXLINE];         /* current input line */
-    char reverse_line[MAXLINE]; /* input in reverse */
+    char input[MAXLEN];
 
-    while ((len = getline(line, MAXLINE)) > 0)
+    while (fgets(input, MAXLEN, stdin) != NULL)
     {
-        reverse(line, len, reverse_line);
-        printf("%s\n", reverse_line);
+        reverse(input);
+        printf("%s", input);
     }
 
+    printf("\n");
+    
     return 0;
 }
 
+/***************************************************
+//
+// Name:         reverse
+//
+// Description:  Reverses the character string s.
+//
+// Paramters:    s (char*) : The character string
+//                            to reverse
+//
+// Return value: none
+//
+****************************************************/
 
-/* getline: read a line into s, return length */
-int getline(char s[], int lim)
+void reverse(char *s)
 {
-    int input, line_length;
+    int temp, i, j;
 
-    for (line_length = 0; line_length < lim - 1 && (input = getchar()) != EOF && input != '\n'; line_length++)
-        s[line_length] = input;
-
-    s[line_length] = '\0';
-
-    return line_length;
-}
-
-
-/* reverse: saves the reverse of array line into array reverse_line */
-void reverse(char line[], int length, char reverse_line[])
-{
-    int index;
-
-    for (index = length - 1; index >= 0; index--)
-        reverse_line[(length - 1) - index] = line[index];
-    
-    reverse_line[length] = '\0';
+    for (i = strlen(s) - 1, j = 0; i > j; i--, j++)
+    {
+        temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+    }
 }
