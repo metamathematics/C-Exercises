@@ -31,3 +31,14 @@ Chapter 1 Exercises
 14. Write a program to print a histogram of the frequencies of different characters.
 
 15. Rewrite the temperature conversion program to use a function for conversion.
+
+16. Revise the main routine of the longest-line program so it will correctly print the 
+    length of arbitrarily long input lines, and as much as possible of the text.
+
+17. Write a program to print all input lines longer than 80 characters.
+
+18. Write a program to remove trailing blanks and tabs from each line of input, and to 
+    delete entire blank lines.
+
+19. Write a function called 'reverse(s)' that reverses the string s. Use it to write a
+    program that reverses its input a line at a time.

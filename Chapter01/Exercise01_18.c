@@ -1,66 +1,41 @@
+/*****************************************************
+//
+// Filename: Exercise01_18.c
+//
+// DESCRIPTION:
+//  Removes trailing blanks and tabs from each line
+//  of input, and deletes entire blank lines.
+//
+*****************************************************/
+
 #include <stdio.h>
-#define MAXLINE 1000    /* maximum input line size */
+#include <string.h>
+#define MAXLEN 1000
 
-int getline(char line[], int maxline);
-int compact(char line[], int length);
+/********************************
+//
+// Name:        main
+//
+// Description: See above.
+//
+********************************/
 
-/* removes all trailing blanks and tabs from each input line,
- *  and deletes blank lines*/
-int main()
+int main(int argc, char *argv[])
 {
-    int len;            /* current line length */
-    char line[MAXLINE];     /* current input line */
+    int len;
+    char input[MAXLEN];
 
-    while ((len = getline(line, MAXLINE)) > 0)
+    while (fgets(input, MAXLEN, stdin) != NULL)
     {
-        if (compact(line, len) > 0)
-            printf("%s", line);
-    }
-
-    return 0;
-}
-
-
-/* getline: read a line into s, return length */
-int getline(char s[], int lim)
-{
-    int input, line_length;
-
-    line_length = 0;
-
-    while ((input = getchar()) != EOF && input != '\n')
-    {
-        if (line_length < lim - 1)
-            s[line_length] = input;
-
-        line_length++;
-    }
-
-    s[line_length] = '\0';
-
-    return line_length;
-}
-
-
-/* compact: removes blanks and tabs from line[] */
-int compact(char line[], int length)
-{
-    int index;
-
-    if (length == 2 && (line[0] == ' ' || line[0] == '\t'))
-        length = 0;
-    else
-    {
-        index = length - 1;
-        
-        while (line[index] == ' ' || line[index] == '\t')
+        while ((len = strlen(input)) && (input[len - 2] == ' ' || input[len - 2] == '\t'))
         {
-            line[index] = '\0';
-            index--;
+            input[len - 2] = input[len - 1];
+            input[len - 1] = '\0';
         }
 
-        length = index + 1;
+        if (input[0] != '\n')
+            printf("%s", input);
     }
-
-    return length;
+    
+    return 0;
 }

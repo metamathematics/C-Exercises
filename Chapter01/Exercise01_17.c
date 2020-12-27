@@ -1,47 +1,33 @@
+/********************************************
+//
+// DESCRIPTION:
+//  Prints all input lines that are longer
+//  than 80 characters.
+//
+********************************************/
+
 #include <stdio.h>
-#define MAXLINE 1000    /* maximum input line size */
-#define MINLINE 80      /* minimum input line size */
+#include <string.h>
 
-int getline(char line[], int maxline);
+#define MAXLEN 1000
 
-/* prints all input line longer than 80 characters.*/
-int main()
+/*********************************
+//
+// Name:        main
+//
+// Description: See above
+//
+*********************************/
+
+int main(int argc, char *argv[])
 {
-    int len;            /* current line length */
-    char line[MAXLINE];     /* current input line */
+    char input[MAXLEN];
 
-    while ((len = getline(line, MAXLINE)) > 0)
+    while (fgets(input, MAXLEN, stdin) != NULL)
     {
-        if (len > MINLINE)
-            printf("%s", line);
+        if (strlen(input) > 80)
+            printf("%s", input);
     }
 
     return 0;
-}
-
-
-/* getline: read a line into s, return length */
-int getline(char s[], int lim)
-{
-    int input, line_length;
-
-    line_length = 0;
-
-    while ((input = getchar()) != EOF && input != '\n')
-    {
-        if (line_length < lim - 1)
-            s[line_length] = input;
-
-        line_length++;
-    }
-
-    if (input == '\n')
-    {
-        s[line_length] = input;
-        line_length++;
-    }
-
-    s[line_length] = '\0';
-
-    return line_length;
 }
