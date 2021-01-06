@@ -11,7 +11,7 @@
 #define MAX 80
 
 int print(char[], int);
-int hasWhiteSpace(char[], int*);
+int hasWhiteSpace(char[], int, int*);
 void copy(char[], char[], int, int);
 
 /***********************************
@@ -24,8 +24,8 @@ void copy(char[], char[], int, int);
 
 int main(int argc, char *argv[])
 {
-    int input, index,
-    char temp[MAX], line[MAX];
+    int input, index;
+    char temp[MAX+1], line[MAX+1];
 
     index = 0;
 
@@ -33,15 +33,15 @@ int main(int argc, char *argv[])
     {
         if (index < MAX)
         {
-            (input == '\n') ? index = print(line, index) : line[i++] = input;
+            (input == '\n') ? index = print(line, index) : (line[index++] = input);
         }
-        else if (line[MAX-1] != ' ' && line[MAX-1] != '\t' && hasWhiteSpace(line, &index))
+        else if (line[MAX-1] != ' ' && line[MAX-1] != '\t' && hasWhiteSpace(line, MAX, &index))
         {
             copy(temp, line, index, MAX);
             print(line, index);
-            copy(line, temp, 0, i = (MAX-1));
+            copy(line, temp, 0, (index = (MAX-1)));
 
-            array[index++] = input
+            line[index++] = input;
         }
         else
         {
@@ -49,6 +49,8 @@ int main(int argc, char *argv[])
             line[index++] = input;
         }
     }
+
+    return 0;
 }
 
 /***********************************************************************
@@ -69,6 +71,9 @@ int main(int argc, char *argv[])
 
 int print(char array[], int max)
 {
+    array[max] = '\0';
+    printf("%s\n", array);
+
     return 0;
 }
 
@@ -82,6 +87,8 @@ int print(char array[], int max)
 //
 // Parameters:   array (char[]) : The char array to search
 //
+//               len (int) : The length of the array
+//
 //               pos (int *) : A pointer to the int that will be set to
 //                             the position of the last space/tab
 //
@@ -90,16 +97,26 @@ int print(char array[], int max)
 //
 ************************************************************************/
 
-int hasWhiteSpace(char array[], int *pos)
+int hasWhiteSpace(char array[], int len, int *pos)
 {
-    return 0;
+    int index;
+
+    *pos = -1;
+
+    for (index = len - 1; index >= 0 && *pos >= 0; index++)
+    {
+        if (array[index] == ' ' || array[index] == '\t')
+            *pos = index;
+    }
+
+    return (*pos < 0) ? 0 : 1;
 }
 
 /********************************************************************************
 //
 // Name:         copy
 //
-// Description:  Copies the a subet of one char array to another.
+// Description:  Copies the a subset of one char array to another.
 //
 // Parameters:   original (char[]) : The char array to be copied from
 //
@@ -115,5 +132,8 @@ int hasWhiteSpace(char array[], int *pos)
 
 void copy(char subArray[], char original[], int start, int end)
 {
-    
+    int i, j;
+
+    for (i = 0, j = start; j < end; i++, j++)
+        subArray[i] = original[j]; 
 }
