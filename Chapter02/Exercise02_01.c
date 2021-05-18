@@ -1,58 +1,177 @@
+/**********************************
+//
+// Filename: Exercise02_01.c
+//
+// Author: Mr. Young
+//
+**********************************/
+
 #include <float.h>
 #include <limits.h>
-#include <math.h>
 #include <stdio.h>
 
-double log2(double);
+void userinterface(void);
+int optionselect(int);
+void charinfo(void);
+void shortinfo(void);
+void intinfo(void);
+void longinfo(void);
 
-/* Determines the length of char, short, int, long, both signed and unsigned*/
-int main(int arc, char *argv[])
+/*****************************************************************
+//
+// Name:        main
+//
+// Description: Prints the ranges of char, short, int, and long.
+//
+*****************************************************************/
+int main(int argc, char *argv[])
 {
-    long int_max, int_min;
-    double long_max, long_min, uint_max, ulong_max;
-    
-    printf("\n----Signed Types----\n");
+    int option, keepgoing = 1;
 
-    printf("\nThe max char is: %d\n", CHAR_MAX);
-    printf("The min char is: %d\n", CHAR_MIN);
-    printf("Length of char: %.0f bits\n", log2(CHAR_MAX - CHAR_MIN));
+    while (keepgoing)
+    {    
+        userinterface();
+        scanf("%d", &option);
+        keepgoing = optionselect(option);
+    }
 
-    printf("\nThe max short is: %d\n", SHRT_MAX);
-    printf("The min short is: %d\n", SHRT_MIN);
-    printf("Length of short: %.0f bits\n", log2(SHRT_MAX - SHRT_MIN));
-    
-    int_max = INT_MAX; 
-    int_min = INT_MIN;
-    printf("\nThe max int is: %d\n", INT_MAX);
-    printf("The min int is: %d\n", INT_MIN);
-    printf("Length of int: %.0f bits\n", log2((int_max - int_min)));
-    
-    long_max = LONG_MAX; 
-    long_min = LONG_MIN;
-    printf("\nThe max long is: %.0f\n", long_max);
-    printf("The min long is: %.0f\n", long_min);
-    printf("Length of long: %.0f bits\n", log2((long_max - long_min)));
-
-    printf("\n\n----Unsigned Types----\n");
-
-    printf("\nThe max unsigned char is: %d\n", UCHAR_MAX);
-    printf("Length of unsigned char: %.0f bits\n", log2(UCHAR_MAX));
-
-    printf("\nThe max unsigned short is: %d\n", USHRT_MAX);
-    printf("Length of unsigned short: %.0f bits\n", log2(USHRT_MAX));
-    
-    uint_max = UINT_MAX; 
-    printf("\nThe max unsigned int is: %.0f\n", uint_max);
-    printf("Length of unsigned int: %.0f bits\n", log2((uint_max)));
-    
-    ulong_max = ULONG_MAX; 
-    printf("\nThe max unsigned long is: %.0f\n", ulong_max);
-    printf("Length of unsigned long: %.0f bits\n\n", log2((ulong_max)));
-    
     return 0;
 }
 
-double log2(double x)
+/*********************************************
+//
+// Name:            userinterface
+//
+// Description:     The UI of the program.
+//
+// Parameters:      None
+//
+// Return Value(s): none
+//
+**********************************************/
+void userinterface()
 {
-    return log(x) / log(2);
+    printf("\nSelect the appropiate option for the given datatype to view its range (enter 0 to quit):\n");
+    printf("1) char \n2) short \n3) int \n4) long \n>> ");
+}
+
+int optionselect(int option)
+{
+    switch(option)
+    {
+        case 0: printf("Good Bye\n");
+                break;
+
+       case 1: charinfo();
+               break;
+
+       case 2: shortinfo();
+               break;
+
+       case 3: intinfo();
+               break;
+
+       case 4: longinfo();
+               break;
+
+       default: printf("Invalid Entry");
+    }
+
+    return option ? 1 : 0;
+}
+
+/**********************************************
+//
+// Name:            charinfo
+//
+// Description:     Display the ranges of char
+//
+// Parameters:      none
+//
+// Return Value(s): none
+//
+***********************************************/
+void charinfo()
+{
+    printf("\n=== range of char ===\n");
+    printf("\n-signed char-\n");
+    printf("min: %d\n", 0);
+    printf("max: %d\n", UCHAR_MAX);
+
+    printf("\n-usigned char-\n");
+    printf("min: %d\n", CHAR_MIN);
+    printf("max: %d\n", CHAR_MAX);
+    printf("\n=== === === ===\n");
+}
+
+/**********************************************
+//
+// Name:            shortinfo
+//
+// Description:     Display the ranges of short
+//
+// Parameters:      none
+//
+// Return Value(s): none
+//
+***********************************************/
+void shortinfo()
+{
+    printf("\n=== range of short ===\n");
+    printf("\n-signed short-\n");
+    printf("min: %d\n", 0);
+    printf("max: %d\n", USHRT_MAX);
+
+    printf("\n-usigned short-\n");
+    printf("min: %d\n", SHRT_MIN);
+    printf("max: %d\n", SHRT_MAX);
+    printf("\n=== === === ===\n");
+}
+
+/**********************************************
+//
+// Name:            intinfo
+//
+// Description:     Display the ranges of int
+//
+// Parameters:      none
+//
+// Return Value(s): none
+//
+***********************************************/
+void intinfo()
+{
+    printf("\n=== range of int ===\n");
+    printf("\n-usigned int-\n");
+    printf("min: %d\n", 0);
+    printf("max: %u\n", UINT_MAX);
+
+    printf("\n-signed int-\n");
+    printf("min: %d\n", INT_MIN);
+    printf("max: %d\n", INT_MAX);
+    printf("\n=== === === ===\n");
+}
+
+/**********************************************
+//
+// Name:            longinfo
+//
+// Description:     Display the ranges of long
+//
+// Parameters:      none
+//
+// Return Value(s): none
+//
+***********************************************/
+void longinfo()
+{
+    printf("\n=== range of long ===\n");
+    printf("\n-usigned long-\n");
+    printf("min: %d\n", 0);
+    printf("max: %lu\n", ULONG_MAX);
+
+    printf("\n-signed long-\n");
+    printf("min: %ld\n", LONG_MIN);
+    printf("max: %ld\n", LONG_MAX);
+    printf("\n=== === === ===\n");
 }
