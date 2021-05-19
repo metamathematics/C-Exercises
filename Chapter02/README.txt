@@ -4,3 +4,10 @@ Chapter 2 Exercises
    variables, both signed and unsigned, by printing appropriate values
    from standard headers and by direct computation. Harder if you compute
    them: determine the ranges of the various floating-point types.
+
+2. Write a loop equivalent to the for loop above without using && or ||.
+
+3. Write the function htoi(s), which converts a string of hexadecimal
+   digits (including an optional 0x or 0X) into its equivalent integer
+   value. The allowable digits are 0 through 9, a through f, and A through
+   F.
