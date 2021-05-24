@@ -1,51 +1,91 @@
+/****************************************************
+//
+// File: Exercise02_03.c
+//
+// Description:
+//  Converts a hex number to its equivalent integer.
+//
+*****************************************************/
+
 #include <ctype.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-int hexToDec(char [], int);
+int htoi(char*);
+int hex(char);
 
-/* Converts hex to dec */
-int main(int arc, char *argv[])
+int main(int argc, char *argv[])
 {
-    int decimal = -1;
-    char hex[1000];
-    
-    printf("Enter a hexadecimal: ");
-    scanf("%s", hex);
+    int intnum;
+    char hex[20];
 
-    /* if first 2 chars are '0' and ('x' or 'X') */
-    if (hex[0] == '0' && toupper(hex[1]) == 'X')
-        decimal = hexToDec(hex, 2);
-    else
-        decimal = hexToDec(hex, 0);
+    hex[0] = '\0';
+    strcpy(hex, argv[1]);
 
-    if (decimal < 0)
-        printf("Error: %s is not a hexadecimal\n", hex);
+    intnum = htoi(hex);
+
+    if (intnum >= 0)
+        printf("%d\n", intnum);
     else
-        printf("%s in decimal is %d\n", hex, decimal);
+        printf("Not a valid hex number.\n");
 
     return 0;
 }
 
-int hexToDec(char hex[], int position)
+int htoi(char *hexnum)
 {
-    int index, dec;
+    char c, s[2];
+    int intnum, index, pwr;
 
-    dec = 0;
+    s[0] = ' ';
+    s[1] = '\0';
+    intnum = pwr = 0;
+    index = strlen(hexnum) - 1;
 
-    for (index = position; hex[index] != '\0' && dec >= 0; index++)
+    while (index >= 0)
     {
-        if (isdigit(hex[index]))
-            dec +=(hex[index] - '0') * pow(16, (strlen(hex) - (index + 1)));
-        else if (isxdigit(hex[index]))
-        {
-            hex[index] = toupper(hex[index]);
-            dec += ((hex[index] - 'A') + 10) * pow(16, (strlen(hex) - (index + 1)));
-        }
+        c = hexnum[index--];
+        s[0] = c;
+
+        if (isdigit(c))
+            intnum += atoi(s) * pow(16, pwr++);
+        else if (isxdigit(c))
+            intnum += hex(c) * pow(16, pwr++);
         else
-            dec = -1;
+            return -1;
     }
 
-    return dec;
+    return intnum;
+}
+
+int hex(char hexdigit)
+{
+    int intnum;
+
+    hexdigit = toupper(hexdigit);
+
+    switch (hexdigit)
+    {
+        case 'A': intnum = 10;
+                  break;
+
+        case 'B': intnum = 11;
+                  break;
+
+        case 'C': intnum = 12;
+                  break;
+
+        case 'D': intnum = 13;
+                  break;
+
+        case 'E': intnum = 14;
+                  break;
+
+        case 'F': intnum = 15;
+                  break;
+    }
+
+    return intnum;
 }
