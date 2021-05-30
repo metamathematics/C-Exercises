@@ -6,6 +6,9 @@
 //
 ******************************/
 
+#include <stdio.h>
+#include <string.h>
+
 /********************************************************************************
 //
 // Name: main
@@ -20,9 +23,10 @@
 int main(int argc, char *argv[])
 {
     int i, lim;
-    char s[100];
+    char s[100], c;
 
     lim = 100;
+    s[0] = '\0';
 
     for (i = 0; i < lim - 1; ++i)
     {
@@ -34,6 +38,11 @@ int main(int argc, char *argv[])
             }
         }
     }
+
+    if (strlen(s) > 0)
+        printf("%s\n", s);
+    else
+        printf("s is empty\n");
 
     return 0;
 }
