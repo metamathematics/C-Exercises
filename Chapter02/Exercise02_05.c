@@ -1,8 +1,38 @@
+/*********************************************
+//
+// File:        Exercise02_05.c
+//
+// Author:      Mr. Young
+//
+// Description: Executes the any function.
+//
+**********************************************/
 #include <stdio.h>
 #include <string.h>
 
 int any(char*, char*);
 
+/*******************************************************************
+//
+// Name:            main
+//
+// Description:     Gets the arguments to put into any. Then
+//                  calls any and prints the return value.
+//
+// Parameters:      argc (int) - The number of arguments this
+//                               program was called with. Should
+//                               be 3.
+//
+//                  argv (char**) - An array of the arguments this
+//                                  program was called with. Should
+//                                  be 3:
+//                                  1) The executable
+//                                  2) The first parameter for any
+//                                  3) The second paramter for any
+//
+// Return Value(s): 0
+//
+*******************************************************************/
 int main(int argc, char *argv[])
 {
     int index;
@@ -19,6 +49,25 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+/*************************************************************************
+//
+// Name:            any
+//
+// Description:     Compares 2 strings, s1 and s2. Then returns the 
+//                  index of the first occurance in s1, of a letter 
+//                  in s2.
+//
+// Parameters:      s1 (char*) - The string in which the index is
+//                               checked.
+//
+//                  s2 (char*) - The string that is the source of
+//                               the letters to compare.
+//                               
+//
+// Return Value(s): The index of the first occurance (in s1) of a letter 
+//                  from s2. Else, -1.
+//
+*************************************************************************/
 int any(char *s1, char *s2)
 {
     int i, j, k, index;
